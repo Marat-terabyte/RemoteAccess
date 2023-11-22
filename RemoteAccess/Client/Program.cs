@@ -4,7 +4,11 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            ClientSocket clientSocket = new ClientSocket();
+            clientSocket.ConnectToServer(Settings.Host, Settings.Port);
+
+            Application app = new Application(clientSocket);
+            app.Run();
         }
     }
 }
