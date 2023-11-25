@@ -17,7 +17,8 @@ namespace Server
 
         public void Run()
         {
-
+            string response = ClientManager.ReceiveFromClient(4096);
+            Console.WriteLine(response);    
         }
     }
 }

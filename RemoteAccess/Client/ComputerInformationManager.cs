@@ -37,7 +37,7 @@ namespace Client
             return sb.ToString();
         }
 
-        public StringBuilder GetComputerSysInformation(string winClass, string propertyName)
+        public string GetComputerSysInformation(string winClass, string propertyName)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -47,7 +47,7 @@ namespace Client
             foreach (var item in _searcher.Get())
                 sb.Append($"{item[propertyName].ToString()?.Trim()}\n");
 
-            return sb;
+            return sb.ToString();
         }
 
         public bool isUserAdmin()

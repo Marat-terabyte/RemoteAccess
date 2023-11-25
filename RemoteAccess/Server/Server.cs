@@ -22,5 +22,12 @@ namespace Server
             Socket.Bind(new IPEndPoint(IPAddress.Parse(host), port));
             Socket.Listen(1);
         }
+
+        public ClientManager GetConnection()
+        {
+            Socket client = Socket.Accept();
+
+            return new ClientManager(client);
+        }
     }
 }

@@ -9,28 +9,31 @@ namespace Server
 {
     internal class ClientManager
     {
-        private Server _server;
-
         public Socket Client { get; private set; }
 
-        public ClientManager(Server server)
+        private NetworkStream _stream;
+        
+        public ClientManager(Socket client)
         {
-            _server = server;
+            Client = client;
+            _stream = new NetworkStream(client);
         }
 
-        public void GetConnection()
+        public void SendToClient(string message)
         {
-            Client = _server.Socket.Accept();
+            var data = Encoding.UTF8.GetBytes(message);
+
+            Client.Send(data);
         }
 
-        public void SendToClient()
+        public string ReceiveFromClient(int size)
         {
+            byte[] byteResponse = new byte[size];
 
-        }
+            var bytes = Client.Receive(byteResponse);
+            string response = Encoding.UTF8.GetString(byteResponse, 0, bytes);
 
-        public void ReceiveFromServer()
-        {
-
+            return response;
         }
     }
 }

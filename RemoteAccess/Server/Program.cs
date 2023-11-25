@@ -7,9 +7,8 @@
             Server socketServer = new Server();
             socketServer.CreateServer(Settings.Host, Settings.Port);
 
-            ClientManager socketClient = new ClientManager(socketServer);
-            socketClient.GetConnection();
-
+            ClientManager socketClient = socketServer.GetConnection();
+            Console.WriteLine(socketClient.Client.RemoteEndPoint?.ToString());
             Application app = new Application(socketClient);
             app.Run();
         }
