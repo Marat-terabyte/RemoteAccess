@@ -23,11 +23,11 @@ namespace Server
             Socket.Listen(1);
         }
 
-        public ClientManager GetConnection()
+        public ClientObject GetConnection()
         {
             Socket client = Socket.Accept();
 
-            return new ClientManager(client);
+            return new ClientObject(client);
         }
     }
 }

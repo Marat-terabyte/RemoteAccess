@@ -12,9 +12,9 @@ namespace Client
     {
         private ComputerInformationManager _computerInfoManager;
 
-        public ClientSocket ClientSocket {  get; private set; }
+        public ServerObject ClientSocket {  get; private set; }
 
-        public Application(ClientSocket clientSocket, ComputerInformationManager computerInfoManager)
+        public Application(ServerObject clientSocket, ComputerInformationManager computerInfoManager)
         {
             _computerInfoManager = computerInfoManager;
             ClientSocket = clientSocket;
@@ -24,6 +24,12 @@ namespace Client
         {
             string infoAboutMachine = _computerInfoManager.GetMainInformation();
             ClientSocket.SendToServer(infoAboutMachine);
+
+            while (true)
+            {
+                string command = ClientSocket.ReceiveFromServer(4096);
+                Console.WriteLine(command);
+            }
         }
     }
 }

@@ -8,17 +8,25 @@ namespace Server
 {
     internal class Application
     {
-        public ClientManager ClientManager;
+        public ClientObject ClientManager;
 
-        public Application(ClientManager clientManager)
+        public Application(ClientObject clientManager)
         {
             ClientManager = clientManager;
         }
 
         public void Run()
         {
-            string response = ClientManager.ReceiveFromClient(4096);
-            Console.WriteLine(response);    
+            string infoAboutComputer = ClientManager.ReceiveFromClient(4096);
+            Console.WriteLine(infoAboutComputer);
+
+            while (true)
+            {
+                Console.Write(">>>");
+                string command = Console.ReadLine()!;
+                
+                ClientManager.SendToClient(command);
+            }
         }
     }
 }

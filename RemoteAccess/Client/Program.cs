@@ -9,7 +9,7 @@ namespace Client
         {
             ComputerInformationManager computerInfoManager = new ComputerInformationManager();
 
-            ClientSocket clientSocket = new ClientSocket();
+            ServerObject clientSocket = new ServerObject();
             clientSocket.ConnectToServer(Settings.Host, Settings.Port);
 
             Application app = new Application(clientSocket, computerInfoManager);

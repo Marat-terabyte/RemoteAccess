@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-    internal class ClientManager
+    internal class ClientObject
     {
         public Socket Client { get; private set; }
 
         private NetworkStream _stream;
         
-        public ClientManager(Socket client)
+        public ClientObject(Socket client)
         {
             Client = client;
             _stream = new NetworkStream(client);

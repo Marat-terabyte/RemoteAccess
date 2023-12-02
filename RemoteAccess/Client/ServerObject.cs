@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    internal class ClientSocket
+    internal class ServerObject
     {
         private NetworkStream _stream;
         
         public Socket Client {  get; private set; }
 
-        public ClientSocket()
+        public ServerObject()
         {
             Client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         }
@@ -52,9 +52,9 @@ namespace Client
             Client.Send(data);
         }
 
-        public string ReceiveFromServer()
+        public string ReceiveFromServer(int size)
         {
-            byte[] byteResponse = new byte[4096];
+            byte[] byteResponse = new byte[size];
 
             var bytes = Client.Receive(byteResponse);
             string response = Encoding.UTF8.GetString(byteResponse, 0, bytes);
