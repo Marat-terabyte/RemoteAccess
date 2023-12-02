@@ -10,24 +10,25 @@ namespace Client
     [SupportedOSPlatform("windows")]
     internal class Application
     {
-        private ComputerInformationManager _computerInfoManager;
+        public ComputerInformationManager ComputerInfo;
+        public ServerObject Server;
+        public FileShareService FileShare;
 
-        public ServerObject ClientSocket {  get; private set; }
-
-        public Application(ServerObject clientSocket, ComputerInformationManager computerInfoManager)
+        public Application(ServerObject server, ComputerInformationManager computerInfoManager)
         {
-            _computerInfoManager = computerInfoManager;
-            ClientSocket = clientSocket;
+            ComputerInfo = computerInfoManager;
+            Server = server;
+            FileShare = new FileShareService(server);
         }
 
         public void Run()
         {
-            string infoAboutMachine = _computerInfoManager.GetMainInformation();
-            ClientSocket.SendToServer(infoAboutMachine);
+            string infoAboutMachine = ComputerInfo.GetMainInformation();
+            Server.SendToServer(infoAboutMachine);
 
             while (true)
             {
-                string command = ClientSocket.ReceiveFromServer(4096);
+                string command = Server.ReceiveFromServer(4096);
                 Console.WriteLine(command);
             }
         }

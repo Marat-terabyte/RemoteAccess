@@ -9,10 +9,12 @@ namespace Server
     internal class Application
     {
         public ClientObject ClientManager;
+        public FileShareService FileShare;
 
         public Application(ClientObject clientManager)
         {
             ClientManager = clientManager;
+            FileShare = new FileShareService(clientManager);
         }
 
         public void Run()
