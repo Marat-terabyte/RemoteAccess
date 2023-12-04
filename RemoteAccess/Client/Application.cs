@@ -13,12 +13,14 @@ namespace Client
         public ComputerInformationManager ComputerInfo;
         public ServerObject Server;
         public FileShareService FileShare;
+        public CommandLineService CommandLine;
 
         public Application(ServerObject server, ComputerInformationManager computerInfoManager)
         {
             ComputerInfo = computerInfoManager;
             Server = server;
             FileShare = new FileShareService(server);
+            CommandLine = new CommandLineService();
         }
 
         public void Run()
@@ -29,7 +31,6 @@ namespace Client
             while (true)
             {
                 string command = Server.ReceiveFromServer(4096);
-                Console.WriteLine(command);
             }
         }
     }
